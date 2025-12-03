@@ -91,7 +91,11 @@ target_include_directories(rlimgui PUBLIC ${RLIMGUI_DIR})
 target_link_libraries(rlimgui PUBLIC imgui raylib)
 
 # === EXECUTABLE ===
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} 
+    src/partie.cpp 
+    src/atomixRaylib.cpp
+    src/main.cpp
+    )
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     raylib 
     flecs::flecs_static 
