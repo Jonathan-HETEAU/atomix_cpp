@@ -22,9 +22,11 @@ namespace Atomix
     }
 
     void AtomixRaylib::drawAtom(Atom &atom)
-    {
-        DrawCircle(atom.position.x * CASE_SIZE + DEMI_CASE_SIZE, atom.position.y * CASE_SIZE + DEMI_CASE_SIZE, ATOME_SIZE, GREEN);
-        DrawCircle(atom.position.x * CASE_SIZE + DEMI_CASE_SIZE, atom.position.y * CASE_SIZE + DEMI_CASE_SIZE, ATOME_SIZE * 0.8, ColorBrightness(GREEN, 0.8));
+    {   Color color = ColorFromNormalized({((atom.data.value *28)%255)/255.f,((atom.data.value*100)%255)/255.f,((atom.data.value*40)%255)/255.f,1.f  });
+        if(atom.isSelected())
+            color = ColorBrightness(color, 0.5);
+        DrawCircle(atom.data.position.x * CASE_SIZE + DEMI_CASE_SIZE, atom.data.position.y * CASE_SIZE + DEMI_CASE_SIZE, ATOME_SIZE, color);
+        DrawCircle(atom.data.position.x * CASE_SIZE + DEMI_CASE_SIZE, atom.data.position.y * CASE_SIZE + DEMI_CASE_SIZE, ATOME_SIZE * 0.8, ColorBrightness(color, 0.8));
     }
 
     void AtomixRaylib::drawMap(int width, int height, bool **map)

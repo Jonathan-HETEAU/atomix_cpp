@@ -2,11 +2,11 @@
 
 namespace Atomix
 {
-    Partie::Partie(Level &level) : level(level)
+    Partie::Partie(LevelData &level) : level(level)
     {
         for (int indexAtom = 0; indexAtom < level.nbrAtoms; indexAtom++)
         {
-            atoms.push_back(level.atoms[indexAtom]);
+            atoms.push_back(Atom(level.atoms[indexAtom]));
         }
     }
 
@@ -25,8 +25,10 @@ namespace Atomix
             return;
         
         if(selected.has_value()){
-            if(atoms[selected.value()].position != position){
+            if(atoms[selected.value()].data.position != position){
+                atoms[selected.value()].toWait();
                 selected.reset();
+
             }else{
                 return;
             }
@@ -34,8 +36,9 @@ namespace Atomix
 
         if(!selected.has_value()){
             for(int atomIndex = 0 ; atomIndex < atoms.size() ; atomIndex ++){
-                if(atoms[atomIndex].position == position){
+                if(atoms[atomIndex].data.position == position){
                     selected.emplace(atomIndex);
+                    atoms[atomIndex].toSelected();
                 }
             }
         }
@@ -53,11 +56,11 @@ namespace Atomix
         movesPossible.clear();
         if(selected.has_value()){
             for(auto direction : DIRECTION_VECTOR){
-                Position position = (atoms[selected.value()].position + direction.second);  
+                Position position = (atoms[selected.value()].data.position + direction.second);  
                 if(level.map[position.y][position.x]){
                     bool isempty = true;
                     for(auto atom : atoms){
-                        if(atom.position == position){
+                        if(atom.data.position == position){
                             isempty = false;break;
                         }
                     }

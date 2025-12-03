@@ -4,6 +4,7 @@
 #include <vector>
 #include "atomix.hpp"
 #include "painter.hpp"
+#include "atom.hpp"
 
 namespace Atomix{
 
@@ -18,7 +19,7 @@ namespace Atomix{
         
         std::set<Direction> movesPossible = {};
     
-        Level& level;
+        LevelData& level;
         std::vector<Atom> atoms = {};
         std::optional<int> selected ;
         
@@ -27,7 +28,7 @@ namespace Atomix{
         inline bool isInMap(Position &position);
 
     public:
-        Partie(Level &level);
+        Partie(LevelData &level);
         ~Partie();
         virtual void draw(Painter &painter);
         void onClick(Position position);

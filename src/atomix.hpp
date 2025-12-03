@@ -26,19 +26,19 @@ namespace Atomix
         }
     };
 
-    struct Atom
+    struct AtomData
     {
         int value;
         Position position;
     };
 
-    struct Level
+    struct LevelData
     {
         int width;
         int height;
         int nbrAtoms;
-        Atom *atoms;
-        Atom *solution;
+        AtomData *atoms;
+        AtomData *solution;
         bool **map;
     };
 

@@ -43,7 +43,7 @@ namespace Atomix
         }
         
         
-        AtomixRaylib(Level &level)
+        AtomixRaylib(LevelData &level)
             : partie(new Partie(level)), camera{
                                              {GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f},
                                              {(float)level.width * DEMI_CASE_SIZE, (float)level.height * DEMI_CASE_SIZE},

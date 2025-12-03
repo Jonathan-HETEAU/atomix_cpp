@@ -1,5 +1,6 @@
 #pragma once
 #include "atomix.hpp"
+#include "atom.hpp"
 
 namespace Atomix
 {

@@ -92,6 +92,7 @@ target_link_libraries(rlimgui PUBLIC imgui raylib)
 
 # === EXECUTABLE ===
 add_executable(${PROJECT_NAME} 
+    src/atom.cpp
     src/partie.cpp 
     src/atomixRaylib.cpp
     src/main.cpp

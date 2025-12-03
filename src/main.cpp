@@ -9,9 +9,9 @@
 
 using namespace Atomix;
 
-Level createLevel()
+LevelData createLevel()
 {
-    Atomix::Level level;
+    Atomix::LevelData level;
     level.height = 5;
     level.width = 6;
     bool **maps = new bool *[5];
@@ -24,7 +24,7 @@ Level createLevel()
 
     level.map = maps;
 
-    level.atoms = new Atomix::Atom[]({0, {1, 1}}, {1, {4, 2}});
+    level.atoms = new Atomix::AtomData[]({0, {1, 1}}, {1, {4, 2}});
     level.nbrAtoms = 2;
     return level;
 }
@@ -38,7 +38,7 @@ int main()
     SetTargetFPS(60);
     rlImGuiSetup(true);
     Atomix::AtomixRaylib::InitAssets();
-    Level level = createLevel();
+    LevelData level = createLevel();
     AtomixRaylib atomix = AtomixRaylib(level);
     while (!WindowShouldClose())
     {   
