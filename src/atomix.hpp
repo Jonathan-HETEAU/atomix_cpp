@@ -19,15 +19,25 @@ namespace Atomix
             return !(*this == other);
         }
 
+        bool operator<(const Position &other) const
+        {
+            return ((y != other.y) && y < other.y ) || ((y == other.y) && x < other.x);
+        }
+
         Position operator+(const Position &other) const
         {
             return {x + other.x, y + other.y};
         }
 
-        Position& operator+=(const Position &other) 
+        Position operator-(const Position &other) const
+        {
+            return {x - other.x, y - other.y};
+        }
+
+        Position &operator+=(const Position &other)
         {
             x += other.x;
-            y += other.y; 
+            y += other.y;
             return *this;
         }
     };
@@ -50,10 +60,10 @@ namespace Atomix
 
     enum Direction
     {
-        UP      = 0,
-        RIGHT   = 1,
-        DOWN    = 2,
-        LEFT    = 3,
+        UP = 0,
+        RIGHT = 1,
+        DOWN = 2,
+        LEFT = 3,
     };
 
     inline const std::map<Direction, Position> DIRECTION_VECTOR = {

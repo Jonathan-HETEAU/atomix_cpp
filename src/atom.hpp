@@ -17,12 +17,12 @@ namespace Atomix
 
     private:
         AtomState state;
-        
-        public:
-        AtomData &data;
-        std::set<Direction> movePosible={};
 
-        Atom(AtomData &data) : data(data), state(Wait) {};
+    public:
+        AtomData data;
+        std::set<Direction> movePosible = {};
+
+        Atom(AtomData data) : data(data), state(Wait) {};
         ~Atom() = default;
 
         void toSelected();
@@ -36,25 +36,36 @@ namespace Atomix
         AtomState getState();
         void setState(AtomState state);
 
-
-
-        bool operator==(Position &position){
+        bool operator==(Position &position)
+        {
             return data.position == position;
         }
 
-        Position operator+(Position &position){
+        bool operator==(int &value)
+        {
+            return data.value == value;
+        }
+
+        Position operator+(Position &position)
+        {
             return data.position + position;
         }
 
-        Position operator+(Direction &direction){
+        Position operator+(Position position)
+        {
+            return position += data.position;
+        }
+
+        Position operator+(Direction &direction)
+        {
             return data.position + DIRECTION_VECTOR.at(direction);
         }
 
-        Atom& operator+=(Direction &direction){
+        Atom &operator+=(Direction &direction)
+        {
             data.position += DIRECTION_VECTOR.at(direction);
             return *this;
         }
-
     };
 
 }

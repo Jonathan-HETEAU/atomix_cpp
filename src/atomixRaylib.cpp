@@ -37,7 +37,8 @@ namespace Atomix
     }
 
     void AtomixRaylib::drawAtom(Atom &atom)
-    {
+    {   
+        
         Color color = ColorFromNormalized({((atom.data.value * 28) % 255) / 255.f, ((atom.data.value * 100) % 255) / 255.f, ((atom.data.value * 40) % 255) / 255.f, 1.f});
         if (atom.isSelected())
         {
@@ -54,13 +55,16 @@ namespace Atomix
     void AtomixRaylib::drawMap(int width, int height, bool **map)
     {
         //DrawRectangle(0, 0, width * CASE_SIZE, height * CASE_SIZE, WHITE);
-        for (int x = 1; x < width - 1; x++)
-        {
-            for (int y = 1; y < height - 1; y++)
+        if(!partie->isWin()){
+            
+            for (int x = 1; x < width - 1; x++)
             {
-                if (map[y][x])
+                for (int y = 1; y < height - 1; y++)
                 {
-                    DrawRectangle((float)(x * CASE_SIZE), (float)(y * CASE_SIZE),CASE_SIZE,CASE_SIZE, WHITE);
+                    if (map[y][x])
+                    {
+                        DrawRectangle((float)(x * CASE_SIZE), (float)(y * CASE_SIZE),CASE_SIZE,CASE_SIZE, WHITE);
+                    }
                 }
             }
         }

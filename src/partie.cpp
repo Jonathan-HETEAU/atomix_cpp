@@ -72,7 +72,7 @@ namespace Atomix
             atom += direction;
             updateAtomMoves(atom);
         }
-        checkIsResolve();
+        checkIsWin();
     }
 
     void Partie::updateAtomMoves(Atom &atom)
@@ -98,9 +98,37 @@ namespace Atomix
         }
     }
 
-    void Partie::checkIsResolve()
-    {
+    void Partie::checkIsWin()
+    {   
+        std::map<Position,Atom&> mapping = {};
+        for(Atom &atom : atoms){
+            mapping.insert({atom.data.position,atom});
+        }
+
+        this->win = false;
+        AtomData & atomRacine = level.solution[0];
+        for(Atom &atom : atoms){
+            if( atom == atomRacine.value){
+                bool win = true;
+                for(int s = 1 ; s < level.nbrAtoms ; s ++){
+                    Position nextAtomPositionInPartie  = atom + (level.solution[s].position - atomRacine.position);
+                    if(mapping.contains(nextAtomPositionInPartie) && mapping.at(nextAtomPositionInPartie) == level.solution[s].value ){
+                        continue;
+                    }
+                    win = false;
+                    break;
+                }
+                if(win){
+                    this->win = true;
+                    return;
+                }
+            }
+        }
         
+    }
+
+    bool Partie::isWin(){
+        return win;
     }
 
     Partie::~Partie()

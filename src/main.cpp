@@ -22,7 +22,8 @@ LevelData createLevel()
 
     level.map = maps;
 
-    level.atoms = new Atomix::AtomData[]({0, {1, 1}}, {1, {4, 2}});
+    level.atoms    =  new Atomix::AtomData[]({0, {1, 1}}, {1, {4, 2}});
+    level.solution = new Atomix::AtomData[]({0, {0,0}}, {1, {1,0}});
     level.nbrAtoms = 2;
     return level;
 }

@@ -20,12 +20,12 @@ namespace Atomix{
         LevelData& level;
         std::vector<Atom> atoms = {};
         std::optional<int> selected ;
-        bool isResolved = false;
+        bool win = false;
         
         void moveAtom(Atom & atom , Direction direction);
         void updateAtomMoves(Atom & atom);
         inline bool isInMap(Position &position);
-        void checkIsResolve();
+        void checkIsWin();
 
     public:
         Partie(LevelData &level);
