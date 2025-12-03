@@ -2,7 +2,6 @@
 #include <list>
 #include <map>
 
-
 namespace Atomix
 {
     struct Position
@@ -44,16 +43,15 @@ namespace Atomix
 
     enum Direction
     {
-        UP,
-        RIGHT,
-        DOWN,
-        LEFT,
+        UP      = 0,
+        RIGHT   = 1,
+        DOWN    = 2,
+        LEFT    = 3,
     };
 
     inline const std::map<Direction, Position> DIRECTION_VECTOR = {
-        {UP, Position{0, -1}}, 
-        {RIGHT, Position{1, 0}}, 
-        {DOWN, Position{0, 1}}, 
-        {LEFT, Position{-1, 0}}
-    };
+        {UP, Position{0, -1}},
+        {RIGHT, Position{1, 0}},
+        {DOWN, Position{0, 1}},
+        {LEFT, Position{-1, 0}}};
 }

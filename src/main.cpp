@@ -1,6 +1,4 @@
 #include "raylib.h"
-#include "rlImGui.h"
-#include "imgui.h"
 #include <string>
 #include <algorithm>
 #include <list>
@@ -36,7 +34,6 @@ int main()
     InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "Atomix - Hello World");
     ToggleFullscreen();
     SetTargetFPS(60);
-    rlImGuiSetup(true);
     Atomix::AtomixRaylib::InitAssets();
     LevelData level = createLevel();
     AtomixRaylib atomix = AtomixRaylib(level);
@@ -49,7 +46,6 @@ int main()
         EndDrawing();
     }
 
-    rlImGuiShutdown();
     CloseWindow();
 
     return 0;

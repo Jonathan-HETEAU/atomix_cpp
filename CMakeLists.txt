@@ -99,9 +99,9 @@ add_executable(${PROJECT_NAME}
     )
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     raylib 
-    flecs::flecs_static 
-    imgui 
-    rlimgui
+   # flecs::flecs_static 
+   # imgui 
+   # rlimgui
 )
 
 # === GESTION ASSETS ===

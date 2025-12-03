@@ -25,8 +25,10 @@ namespace Atomix
             return;
         
         if(selected.has_value()){
-            if(atoms[selected.value()].data.position != position){
-                atoms[selected.value()].toWait();
+            Atom & atomSelected = atoms[selected.value()];
+            if(atomSelected.data.position != position){
+                atomSelected.toWait();
+                atomSelected.movePosible.clear();
                 selected.reset();
 
             }else{
@@ -39,6 +41,7 @@ namespace Atomix
                 if(atoms[atomIndex].data.position == position){
                     selected.emplace(atomIndex);
                     atoms[atomIndex].toSelected();
+                    updateAtomMoves(atoms[atomIndex]);
                 }
             }
         }
@@ -52,11 +55,10 @@ namespace Atomix
                 position.y < level.height;
     }
 
-    void Partie::updateAtomSelectedMoves(){
-        movesPossible.clear();
-        if(selected.has_value()){
+    void Partie::updateAtomMoves(Atom & atom){
+            atom.movePosible.clear();
             for(auto direction : DIRECTION_VECTOR){
-                Position position = (atoms[selected.value()].data.position + direction.second);  
+                Position position = (atom.data.position + direction.second);  
                 if(level.map[position.y][position.x]){
                     bool isempty = true;
                     for(auto atom : atoms){
@@ -64,11 +66,9 @@ namespace Atomix
                             isempty = false;break;
                         }
                     }
-                    if(isempty) movesPossible.emplace(direction.first);
+                    if(isempty) atom.movePosible.emplace(direction.first);
                 }              
             }
-        }
-        
     }
 
     Partie::~Partie(){

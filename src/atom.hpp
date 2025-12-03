@@ -1,5 +1,6 @@
 #pragma once
 #include "atomix.hpp"
+#include <set>
 
 namespace Atomix
 {
@@ -16,9 +17,10 @@ namespace Atomix
 
     private:
         AtomState state;
-
-    public:
+        
+        public:
         AtomData &data;
+        std::set<Direction> movePosible={};
 
         Atom(AtomData &data) : data(data), state(Wait) {};
         ~Atom() = default;

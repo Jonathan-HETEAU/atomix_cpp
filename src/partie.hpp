@@ -17,14 +17,12 @@ namespace Atomix{
     {
     private:
         
-        std::set<Direction> movesPossible = {};
-    
         LevelData& level;
         std::vector<Atom> atoms = {};
         std::optional<int> selected ;
         
         
-        void updateAtomSelectedMoves();
+        void updateAtomMoves(Atom & atom);
         inline bool isInMap(Position &position);
 
     public:
