@@ -20,16 +20,19 @@ namespace Atomix{
         LevelData& level;
         std::vector<Atom> atoms = {};
         std::optional<int> selected ;
+        bool isResolved = false;
         
-        
+        void moveAtom(Atom & atom , Direction direction);
         void updateAtomMoves(Atom & atom);
         inline bool isInMap(Position &position);
+        void checkIsResolve();
 
     public:
         Partie(LevelData &level);
         ~Partie();
-        virtual void draw(Painter &painter);
+        void draw(Painter &painter);
         void onClick(Position position);
+        bool isWin();
         
     };
 

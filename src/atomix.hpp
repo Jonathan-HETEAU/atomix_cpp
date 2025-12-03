@@ -23,6 +23,13 @@ namespace Atomix
         {
             return {x + other.x, y + other.y};
         }
+
+        Position& operator+=(const Position &other) 
+        {
+            x += other.x;
+            y += other.y; 
+            return *this;
+        }
     };
 
     struct AtomData

@@ -35,6 +35,26 @@ namespace Atomix
 
         AtomState getState();
         void setState(AtomState state);
+
+
+
+        bool operator==(Position &position){
+            return data.position == position;
+        }
+
+        Position operator+(Position &position){
+            return data.position + position;
+        }
+
+        Position operator+(Direction &direction){
+            return data.position + DIRECTION_VECTOR.at(direction);
+        }
+
+        Atom& operator+=(Direction &direction){
+            data.position += DIRECTION_VECTOR.at(direction);
+            return *this;
+        }
+
     };
 
 }

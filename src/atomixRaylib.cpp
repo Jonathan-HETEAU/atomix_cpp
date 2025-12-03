@@ -53,15 +53,14 @@ namespace Atomix
 
     void AtomixRaylib::drawMap(int width, int height, bool **map)
     {
-        DrawRectangle(0, 0, width * CASE_SIZE, height * CASE_SIZE, WHITE);
+        //DrawRectangle(0, 0, width * CASE_SIZE, height * CASE_SIZE, WHITE);
         for (int x = 1; x < width - 1; x++)
         {
             for (int y = 1; y < height - 1; y++)
             {
                 if (map[y][x])
                 {
-                    Texture2D texture = GetTextureByPosition(map, x, y);
-                    DrawTexture(texture, (float)(x * CASE_SIZE), (float)(y * CASE_SIZE), WHITE);
+                    DrawRectangle((float)(x * CASE_SIZE), (float)(y * CASE_SIZE),CASE_SIZE,CASE_SIZE, WHITE);
                 }
             }
         }
