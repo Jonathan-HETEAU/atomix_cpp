@@ -21,7 +21,7 @@ namespace Atomix
 
         bool operator<(const Position &other) const
         {
-            return ((y != other.y) && y < other.y ) || ((y == other.y) && x < other.x);
+            return ((y != other.y) && y < other.y) || ((y == other.y) && x < other.x);
         }
 
         Position operator+(const Position &other) const
@@ -39,6 +39,10 @@ namespace Atomix
             x += other.x;
             y += other.y;
             return *this;
+        }
+        Position operator*(const int multiplicateur)
+        {
+            return {x * multiplicateur, y * multiplicateur};
         }
     };
 

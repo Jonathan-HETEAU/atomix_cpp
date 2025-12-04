@@ -32,7 +32,7 @@ namespace Atomix
 
     void AtomixRaylib::draw(float delta)
     {
-
+        
         BeginMode2D(camera);
         partie->draw(*this);
         EndMode2D();

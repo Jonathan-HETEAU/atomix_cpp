@@ -95,6 +95,7 @@ add_executable(${PROJECT_NAME}
     src/atom.cpp
     src/partie.cpp 
     src/atomixRaylib.cpp
+    src/atomixRaylib/partieObserver.cpp
     src/main.cpp
     )
 target_link_libraries(${PROJECT_NAME} PRIVATE 

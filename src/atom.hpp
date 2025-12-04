@@ -5,37 +5,22 @@
 namespace Atomix
 {
 
-    enum AtomState
-    {
-        Selected,
-        Move,
-        Wait,
-    };
-
     class Atom
     {
 
     private:
-        AtomState state;
-
     public:
+        const int id;
         AtomData data;
+        bool selected;
         std::set<Direction> movePosible = {};
 
-        Atom(AtomData data) : data(data), state(Wait) {};
+        Atom(int id,AtomData data) :id(id), data(data), selected(false) {};
         ~Atom() = default;
-
         void toSelected();
-        void toMove();
         void toWait();
-
         bool isSelected();
-        bool isMoved();
         bool isWaited();
-
-        AtomState getState();
-        void setState(AtomState state);
-
         bool operator==(Position &position)
         {
             return data.position == position;
@@ -53,7 +38,7 @@ namespace Atomix
 
         Position operator+(Position position)
         {
-            return position +  data.position;
+            return position + data.position;
         }
 
         Position operator+(Direction &direction)

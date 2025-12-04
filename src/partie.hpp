@@ -8,10 +8,17 @@
 
 namespace Atomix{
 
-    enum Action {
+    class PartieObserver{
+        
+        public:
+        PartieObserver()=default;
+        ~PartieObserver()=default;
+        virtual void onWin()=0;
+        virtual void onAtomSelected(Atom &selected)=0;
+        virtual void onAtomUnselected(Atom &unselected)=0;
+        virtual void onAtomMove(Atom &atom , Position &origin , Position &dest)=0;
 
     };
-
 
     class Partie
     {
@@ -21,7 +28,14 @@ namespace Atomix{
         std::vector<Atom> atoms = {};
         std::optional<int> selected ;
         bool win = false;
+
+        std::set<PartieObserver *> observers = {};
         
+        void DispatchOnWin();
+        void DispatchOnAtomSelected(Atom &selected);
+        void DispatchOnAtomUnselected(Atom &unselected);
+        void DispatchOnAtomMove(Atom &atom , Position &origin , Position &dest);
+
         void moveAtom(Atom & atom , Direction direction);
         void updateAtomMoves(Atom & atom);
         inline bool isInMap(Position &position);
@@ -31,9 +45,13 @@ namespace Atomix{
         Partie(LevelData &level);
         ~Partie();
         void draw(Painter &painter);
+        
         void onClick(Position position);
         void onSwitchAtom();
         void onMoveAtom(Direction direction);
+
+        void addObserver(PartieObserver & observer);
+        void removeObserver(PartieObserver & observer);
         bool isWin();
         
     };

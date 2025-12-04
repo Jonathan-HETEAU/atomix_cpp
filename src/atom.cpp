@@ -5,38 +5,22 @@ namespace Atomix
 
     void Atom::toSelected()
     {
-        state = Selected;
+        selected = true;
     }
-    void Atom::toMove()
-    {
-        state = Move;
-    }
+    
     void Atom::toWait()
     {
-        state = Wait;
+        selected = false;
     }
 
     bool Atom::isSelected()
     {
-        return state == Selected;
+        return selected;
     }
-    bool Atom::isMoved()
-    {
-        return state == Move;
-    }
+    
     bool Atom::isWaited()
     {
-        return state == Wait;
-    }
-
-    AtomState Atom::getState()
-    {
-        return state;
-    }
-
-    void Atom::setState(AtomState newState)
-    {
-        state = newState;
+        return !selected;
     }
 
 }

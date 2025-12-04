@@ -15,7 +15,7 @@ namespace Atomix
 
     const std::string ASSETS_PATH_BY_SIZE = std::string(ASSETS_PATH) + TextFormat("%d/",CASE_SIZE);
 
-    class AtomixRaylib : public Painter
+    class AtomixRaylib : public Painter , public PartieObserver
     {
     private:
         inline static Texture2D Assets[16] = {};
@@ -60,7 +60,9 @@ namespace Atomix
                                              {GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f},
                                              {(float)level.width * DEMI_CASE_SIZE, (float)level.height * DEMI_CASE_SIZE},
                                              0.f,
-                                             GetScreenHeight() / (float)(level.height * CASE_SIZE)} {};
+                                             GetScreenHeight() / (float)(level.height * CASE_SIZE)} {
+                                                partie->addObserver(*this);
+                                             };
 
         ~AtomixRaylib()
         {
@@ -72,6 +74,10 @@ namespace Atomix
         void drawAtom(Atom &atom);
         void drawMap(int width, int height, bool **map);
         void drawDirection(Direction direction,Position position , Color color);
+        void onWin();
+        void onAtomSelected(Atom &selected);
+        void onAtomUnselected(Atom &unselected);
+        void onAtomMove(Atom &atom , Position &origin , Position &dest);
     };
 
 }
