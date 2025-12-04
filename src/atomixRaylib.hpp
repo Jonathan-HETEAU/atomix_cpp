@@ -13,7 +13,7 @@ namespace Atomix
     constexpr int DEMI_CASE_SIZE = CASE_SIZE / 2;
     constexpr int ATOME_SIZE = DEMI_CASE_SIZE * 0.8;
 
-    const std::string ASSETS_PATH_BY_SIZE = std::string(ASSETS_PATH) + TextFormat("%d/",CASE_SIZE);
+    const std::string ASSETS_PATH_BY_SIZE = std::string(ASSETS_PATH) + TextFormat("images/%d/",CASE_SIZE);
 
     class AtomixRaylib : public Painter , public PartieObserver
     {
