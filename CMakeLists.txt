@@ -70,6 +70,14 @@ else()
     message(STATUS "rlImGui: Utilisation de la version locale dans ${RLIMGUI_DIR}")
 endif()
 
+# === NLOHMANN JSON ===
+FetchContent_DeclareLocalOrRemote(json
+    "${CPP_LIBS_DIR}/json"
+    "https://github.com/nlohmann/json.git"
+    "v3.11.3"
+)
+FetchContent_MakeAvailable(json)
+
 # === MAKE AVAILABLE RAYLIB & FLECS ===
 FetchContent_MakeAvailable(raylib flecs)
 
@@ -103,6 +111,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
    # flecs::flecs_static 
    # imgui 
    # rlimgui
+    nlohmann_json::nlohmann_json
 )
 
 # === GESTION ASSETS ===

@@ -1,0 +1,132 @@
+{
+  "width": 11,
+  "height": 7,
+  "nbrAtoms": 3,
+  "map": [
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      true,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      true,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  ],
+  "atoms": [
+    {
+      "x": 1,
+      "y": 1,
+      "value": 16057862
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "value": 22271
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "value": 16057862
+    }
+  ],
+  "solution": [
+    {
+      "x": 4,
+      "y": 4,
+      "value": 16057862
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "value": 16057862
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "value": 22271
+    }
+  ]
+}
