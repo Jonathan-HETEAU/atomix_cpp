@@ -56,6 +56,24 @@ namespace Atomix
         }
     }
 
+    void Partie::onSwitchAtom(){
+        
+        if( selected.has_value()){
+            atoms[selected.value()].toWait();
+            selected.emplace( (selected.value() + 1) % atoms.size()); 
+        }else{
+            selected.emplace(0);
+        }
+        atoms[selected.value()].toSelected();
+        updateAtomMoves(atoms[selected.value()]);
+    }
+    
+    void Partie::onMoveAtom(Direction direction){
+        if( selected.has_value()){
+            moveAtom(atoms[selected.value()],direction);
+        }
+    }
+
     inline bool Partie::isInMap(Position &position)
     {
         return position.x >= 0 &&

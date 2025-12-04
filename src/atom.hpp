@@ -53,7 +53,7 @@ namespace Atomix
 
         Position operator+(Position position)
         {
-            return position += data.position;
+            return position +  data.position;
         }
 
         Position operator+(Direction &direction)

@@ -32,6 +32,8 @@ namespace Atomix{
         ~Partie();
         void draw(Painter &painter);
         void onClick(Position position);
+        void onSwitchAtom();
+        void onMoveAtom(Direction direction);
         bool isWin();
         
     };

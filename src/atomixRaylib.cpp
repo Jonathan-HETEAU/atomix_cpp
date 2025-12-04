@@ -12,6 +12,22 @@ namespace Atomix
         {
             partie->onClick(currentMousePosition);
         }
+        if(IsKeyPressed(KEY_TAB)){
+            partie->onSwitchAtom();
+        }
+        if(IsKeyPressed(KEY_UP)){
+            partie->onMoveAtom(UP);
+        }
+        if(IsKeyPressed(KEY_DOWN)){
+            partie->onMoveAtom(DOWN);
+        }
+        if(IsKeyPressed(KEY_LEFT)){
+            partie->onMoveAtom(LEFT);
+        }
+        if(IsKeyPressed(KEY_RIGHT)){
+            partie->onMoveAtom(RIGHT);
+        }
+
     }
 
     void AtomixRaylib::draw(float delta)
