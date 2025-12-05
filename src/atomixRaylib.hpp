@@ -13,7 +13,17 @@ namespace Atomix
     constexpr int DEMI_CASE_SIZE = CASE_SIZE / 2;
     constexpr int ATOME_SIZE = DEMI_CASE_SIZE * 0.8;
 
+
     const std::string ASSETS_PATH_BY_SIZE = std::string(ASSETS_PATH) + TextFormat("images/%d/",CASE_SIZE);
+
+    struct Panel {
+
+        int width;
+        int height;
+        Position position;
+        RenderTexture2D render;
+        Camera2D camera;
+    };
 
     class AtomixRaylib : public Painter , public PartieObserver
     {
@@ -21,8 +31,11 @@ namespace Atomix
         inline static Texture2D Assets[16] = {};
         inline static Texture2D AssetsDirection[4] = {};
 
-        Camera2D camera;
         Partie *partie;
+        
+        Panel panelLevel;
+        
+        
         float currentDeltat = 0.f;
         Position currentMousePosition = {0,0};
 
@@ -56,13 +69,20 @@ namespace Atomix
         
         
         AtomixRaylib(LevelData &level)
-            : partie(new Partie(level)), camera{
-                                             {GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f},
-                                             {(float)level.width * DEMI_CASE_SIZE, (float)level.height * DEMI_CASE_SIZE},
-                                             0.f,
-                                             GetScreenHeight() / (float)(level.height * CASE_SIZE)} {
-                                                partie->addObserver(*this);
-                                             };
+            : partie(new Partie(level))
+            , panelLevel({
+                GetScreenWidth()-200 , 
+                GetScreenHeight(),
+                {0,0} ,
+                LoadRenderTexture(GetScreenWidth()-200 , GetScreenHeight()),
+                {  
+                    {(GetScreenWidth() - 200 ) / 2.0f, GetScreenHeight() / 2.0f},
+                    {(float)level.width * DEMI_CASE_SIZE, (float)level.height * DEMI_CASE_SIZE},
+                    0.f,
+                    std::min(GetScreenHeight() / (float)(level.height * CASE_SIZE),(GetScreenWidth()-200) / (float)(level.width * CASE_SIZE) )
+                } 
+            }){};
+                                             
 
         ~AtomixRaylib()
         {
@@ -70,7 +90,10 @@ namespace Atomix
         }
 
         void updateInput(float delta);
+        
         void draw(float delta);
+        void drawLevel();
+        void drawMolecul();
         void drawAtom(Atom &atom);
         void drawMap(int width, int height, bool **map);
         void drawDirection(Direction direction,Position position , Color color);

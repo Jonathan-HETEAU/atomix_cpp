@@ -5,37 +5,49 @@ namespace Atomix
 
     void AtomixRaylib::updateInput(float delta)
     {
-        auto position = GetScreenToWorld2D(GetMousePosition(), camera);
+        auto position = GetScreenToWorld2D(GetMousePosition(), panelLevel.camera);
         currentMousePosition = {(int)position.x / CASE_SIZE, (int)position.y / CASE_SIZE};
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
             partie->onClick(currentMousePosition);
         }
-        if(IsKeyPressed(KEY_TAB)){
+        if (IsKeyPressed(KEY_TAB))
+        {
             partie->onSwitchAtom();
         }
-        if(IsKeyPressed(KEY_UP)){
+        if (IsKeyPressed(KEY_UP))
+        {
             partie->onMoveAtom(UP);
         }
-        if(IsKeyPressed(KEY_DOWN)){
+        if (IsKeyPressed(KEY_DOWN))
+        {
             partie->onMoveAtom(DOWN);
         }
-        if(IsKeyPressed(KEY_LEFT)){
+        if (IsKeyPressed(KEY_LEFT))
+        {
             partie->onMoveAtom(LEFT);
         }
-        if(IsKeyPressed(KEY_RIGHT)){
+        if (IsKeyPressed(KEY_RIGHT))
+        {
             partie->onMoveAtom(RIGHT);
         }
+    }
 
+    void AtomixRaylib::drawLevel()
+    {
+        BeginTextureMode(panelLevel.render);
+        ClearBackground(BLACK);
+        BeginMode2D(panelLevel.camera);
+        partie->draw(*this);
+        EndMode2D();
+        EndTextureMode();
+        DrawTextureRec(panelLevel.render.texture, {0, 0, (float)panelLevel.render.texture.width, (float)-panelLevel.render.texture.height}, {(float)panelLevel.position.x, (float)panelLevel.position.y}, WHITE);
     }
 
     void AtomixRaylib::draw(float delta)
     {
-        
-        BeginMode2D(camera);
-        partie->draw(*this);
-        EndMode2D();
+        drawLevel();
     }
 
     void AtomixRaylib::drawDirection(Direction direction, Position position, Color color)
@@ -53,9 +65,16 @@ namespace Atomix
     }
 
     void AtomixRaylib::drawAtom(Atom &atom)
-    {   
-        
-        Color color = ColorFromNormalized({((atom.data.value * 28) % 255) / 255.f, ((atom.data.value * 100) % 255) / 255.f, ((atom.data.value * 40) % 255) / 255.f, 1.f});
+    {
+
+        Color color = {
+            (unsigned char)((atom.data.value >> 24) & 0xFF), // R
+            (unsigned char)((atom.data.value >> 16) & 0xFF), // G
+            (unsigned char)((atom.data.value >> 8) & 0xFF),  // B
+            (unsigned char)(atom.data.value | 0xFF)          // A
+        };
+
+        TraceLog(LOG_INFO, TextFormat("%d = %d,%d,%d,%d", atom.data.value, color.r, color.g, color.b, color.a));
         if (atom.isSelected())
         {
             for (Direction dir : atom.movePosible)
@@ -70,16 +89,17 @@ namespace Atomix
 
     void AtomixRaylib::drawMap(int width, int height, bool **map)
     {
-        //DrawRectangle(0, 0, width * CASE_SIZE, height * CASE_SIZE, WHITE);
-        if(!partie->isWin()){
-            
+        // DrawRectangle(0, 0, width * CASE_SIZE, height * CASE_SIZE, WHITE);
+        if (!partie->isWin())
+        {
+
             for (int x = 1; x < width - 1; x++)
             {
                 for (int y = 1; y < height - 1; y++)
                 {
                     if (map[y][x])
                     {
-                        DrawRectangle((float)(x * CASE_SIZE), (float)(y * CASE_SIZE),CASE_SIZE,CASE_SIZE, WHITE);
+                        DrawRectangle((float)(x * CASE_SIZE), (float)(y * CASE_SIZE), CASE_SIZE, CASE_SIZE, WHITE);
                     }
                 }
             }

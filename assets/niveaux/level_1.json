@@ -1,0 +1,171 @@
+{
+  "width": 9,
+  "height": 10,
+  "nbrAtoms": 5,
+  "map": [
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    [
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      true,
+      true,
+      false
+    ],
+    [
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      true,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      true,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  ],
+  "atoms": [
+    {
+      "x": 7,
+      "y": 3,
+      "value": 16057862
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "value": 22271
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "value": 22271
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "value": 22271
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "value": 16057862
+    }
+  ],
+  "solution": [
+    {
+      "x": 4,
+      "y": 6,
+      "value": 16057862
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "value": 16057862
+    },
+    {
+      "x": 3,
+      "y": 6,
+      "value": 22271
+    },
+    {
+      "x": 3,
+      "y": 7,
+      "value": 22271
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "value": 22271
+    }
+  ]
+}

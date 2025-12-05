@@ -13,14 +13,14 @@ int main()
     AtomixRaylib::InitAssets();
     
     // Charger depuis JSON
-    LevelData level = loadLevel(0);
+    LevelData level = loadLevel(1);
     AtomixRaylib atomix(level);
     
     while (!WindowShouldClose())
     {   
         atomix.updateInput(GetFrameTime());
         BeginDrawing();
-        ClearBackground(BLACK);
+        ClearBackground(WHITE);
         atomix.draw(GetFrameTime());
         EndDrawing();
     }
