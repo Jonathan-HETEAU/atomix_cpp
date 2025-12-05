@@ -6,7 +6,7 @@ namespace Atomix
     {
         for (int indexAtom = 0; indexAtom < level.nbrAtoms; indexAtom++)
         {
-            atoms.push_back(Atom(indexAtom,level.atoms[indexAtom]));
+            atoms.push_back(Atom(indexAtom, level.atoms[indexAtom]));
         }
     }
 
@@ -105,6 +105,7 @@ namespace Atomix
         }
         if (hasChange)
         {
+            stat.moves.push_front({origin, atom.data.position});
             DispatchOnAtomMove(atom, origin, atom.data.position);
         }
         checkIsWin();
@@ -197,11 +198,46 @@ namespace Atomix
         }
     }
 
-    void Partie::addObserver(PartieObserver & observer){
+    void Partie::addObserver(PartieObserver &observer)
+    {
         observers.emplace(&observer);
     }
-    void Partie::removeObserver(PartieObserver & observer){
+    void Partie::removeObserver(PartieObserver &observer)
+    {
         observers.erase(&observer);
+    }
+
+    void Partie::onUndo()
+    {
+        if (stat.moves.size() > 0)
+        {
+            Move move = stat.moves.front();
+            for (auto &atom : atoms)
+            {
+                if (atom == move.destination)
+                {
+                    atom.data.position = move.origin;
+                    updateAtomMoves(atom);
+                    stat.moves.pop_front();
+                    return;
+                }
+            }
+        }
+    }
+
+    LevelData &Partie::getLevel()
+    {
+        return level;
+    }
+
+    Stat &Partie::getStat()
+    {
+        return stat;
+    }
+
+    const std::vector<Atom> &Partie::getAtoms()
+    {
+        return atoms;
     }
 
     bool Partie::isWin()

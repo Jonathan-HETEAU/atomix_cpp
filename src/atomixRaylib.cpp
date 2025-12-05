@@ -32,6 +32,9 @@ namespace Atomix
         {
             partie->onMoveAtom(RIGHT);
         }
+        if( IsKeyPressed(KEY_SPACE)){
+            partie->onUndo();
+        }
     }
 
     void AtomixRaylib::drawLevel()
