@@ -45,9 +45,37 @@ namespace Atomix
         DrawTextureRec(panelLevel.render.texture, {0, 0, (float)panelLevel.render.texture.width, (float)-panelLevel.render.texture.height}, {(float)panelLevel.position.x, (float)panelLevel.position.y}, WHITE);
     }
 
+    void AtomixRaylib::drawMolecul()
+    {
+        BeginTextureMode(panelMolecul.render);
+        ClearBackground(GREEN);
+        BeginMode2D(panelMolecul.camera);
+        for (int atomIndex = 0; atomIndex < level.nbrAtoms; atomIndex++)
+        {
+            AtomData &atom = level.solution[atomIndex];
+            Color color = {
+                (unsigned char)((atom.value >> 24) & 0xFF), // R
+                (unsigned char)((atom.value >> 16) & 0xFF), // G
+                (unsigned char)((atom.value >> 8) & 0xFF),  // B
+                (unsigned char)(atom.value | 0xFF)          // A
+            };
+
+            DrawCircle(atom.position.x * CASE_SIZE + DEMI_CASE_SIZE, atom.position.y * CASE_SIZE + DEMI_CASE_SIZE, DEMI_CASE_SIZE, color);
+            DrawCircle(atom.position.x * CASE_SIZE + DEMI_CASE_SIZE, atom.position.y * CASE_SIZE + DEMI_CASE_SIZE, DEMI_CASE_SIZE * 0.8, ColorBrightness(color, 0.8));
+        }
+        EndMode2D();
+        EndTextureMode();
+        DrawTexturePro(
+            panelMolecul.render.texture,
+            {0, 0, (float)panelMolecul.render.texture.width, (float)-panelMolecul.render.texture.height},
+            {(float)panelMolecul.position.x, (float)panelMolecul.position.y, (float)panelMolecul.width, (float)panelMolecul.height},
+            {0, 0},0, WHITE);
+    }
+
     void AtomixRaylib::draw(float delta)
     {
         drawLevel();
+        drawMolecul();
     }
 
     void AtomixRaylib::drawDirection(Direction direction, Position position, Color color)
@@ -74,7 +102,6 @@ namespace Atomix
             (unsigned char)(atom.data.value | 0xFF)          // A
         };
 
-        TraceLog(LOG_INFO, TextFormat("%d = %d,%d,%d,%d", atom.data.value, color.r, color.g, color.b, color.a));
         if (atom.isSelected())
         {
             for (Direction dir : atom.movePosible)
